@@ -9,8 +9,6 @@ class Blockchain(object):
 
         self.new_block(previous_hash="The Times 03/Jan/2009 Chancellor on brink of second bailout for banks.", proof=100)
 
-# Create a new block listing key/value pairs of block information in a JSON object. Reset the list of pending transactions & append the newest block to the chain.
-
     def new_block(self, proof, previous_hash=None):
         block = {
             'index': len(self.chain) + 1,
@@ -24,14 +22,10 @@ class Blockchain(object):
 
         return block
 
-#Search the blockchain for the most recent block.
-
     @property
     def last_block(self):
 
         return self.chain[-1]
-
-# Add a transaction with relevant info to the 'blockpool' - list of pending tx's.
 
     def new_transaction(self, sender, recipient, amount):
         transaction = {
@@ -42,8 +36,6 @@ class Blockchain(object):
         self.pending_transactions.append(transaction)
         return self.last_block['index'] + 1
 
-# receive one block. Turn it into a string, turn that into Unicode (for hashing). Hash with SHA256 encryption, then translate the Unicode into a hexidecimal string.
-
     def hash(self, block):
         string_object = json.dumps(block, sort_keys=True)
         block_string = string_object.encode()
@@ -53,16 +45,15 @@ class Blockchain(object):
 
         return hex_hash
 
-
 blockchain = Blockchain()
-t1 = blockchain.new_transaction("Satoshi", "Mike", '5 BTC')
-t2 = blockchain.new_transaction("Mike", "Satoshi", '1 BTC')
-t3 = blockchain.new_transaction("Satoshi", "Hal Finney", '5 BTC')
+transactionone = blockchain.new_transaction("DOGE", "Ivan", '0.50 BTC')
+transactiontwo = blockchain.new_transaction("USDT", "Georgi", '0.05 BTC')
+transactionthree = blockchain.new_transaction("BTC", "Petar", '0.10 BTC')
 blockchain.new_block(12345)
 
-t4 = blockchain.new_transaction("Mike", "Alice", '1 BTC')
-t5 = blockchain.new_transaction("Alice", "Bob", '0.5 BTC')
-t6 = blockchain.new_transaction("Bob", "Mike", '0.5 BTC')
+transactionfour = blockchain.new_transaction("SHIB", "Alisia", '1 BTC')
+transactionfive = blockchain.new_transaction("LTC", "Pavlina", '0.892 BTC')
+transactionsix = blockchain.new_transaction("BNB", "Maria", '0.5 BTC')
 blockchain.new_block(6789)
 
-print("Genesis block: ", blockchain.chain)
+print("Example block: ", blockchain.chain)
